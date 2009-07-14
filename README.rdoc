@@ -1,6 +1,26 @@
-= bucket_head
+= BucketHead
 
-Description goes here.
+BucketHead grabs the contents of a URI and sticks them on S3. It requires either the RightAWS or AWS/S3 libraries--if both are present it uses RightAWS.
+
+== Usage:
+
+  BucketHead.set_bucket_name('your-bucket')
+  BucketHead.put( :uri => 'http://wordie.org/', :key => 'fake-wordie.html')
+
+Results in the contents of the specified URI being uploaded to:
+http://your-bucket.s3.amazonaws.com/fake-wordie.html
+
+By default buckets and anything put in them have 'public-read' access. You can set bucket permissions, if, prior to bucket creation, you call:
+
+  BucketHead.set_bucket_access( 'public-read|private|public-read-write|authenticated-read')
+
+You can set access on individual objects within buckets with an ':access' argument:
+
+  BucketHead.put( :uri => 'http://wordie.org/', :key => 'fake-wordie.html', :access => 'private')
+
+BucketHead will try to base the content type on the filename suffix, but you can set it explicitly if you want:
+
+  BucketHead.put( :uri => 'http://wordie.org/', :key => 'fake-wordie.html', :access => 'private', :content_type => 'text/html')
 
 == Copyright
 
