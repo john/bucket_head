@@ -2,6 +2,10 @@
 
 BucketHead grabs the contents of a URI--an image, html or xml file, whatever--and sticks them on S3. It requires either the RightAWS or AWS/S3 libraries. If both are present it uses RightAWS.
 
+== Install:
+
+  sudo gem install john-bucket_head-0.1.0 --source http://gems.github.com
+
 == Usage:
 
 Make a hash available in your environment called AWS_CREDENTIALS holding, yes, your AWS credential. In Rails you can create a config/initializers/amazon_credentials.rb file containing:
