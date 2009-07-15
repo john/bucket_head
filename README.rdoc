@@ -35,4 +35,4 @@ BucketHead will try to base the content type on what it finds at the :uri, but y
 
 == Copyright
 
-Copyright (c) 2009 John McGrath. See LICENSE for details.
+Copyright (c) 2009 John McGrath, released under the MIT License. See LICENSE for details.
