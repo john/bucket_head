@@ -26,7 +26,7 @@ class BucketHead
   end
   
   def self.bucket_access
-    @bucket_access = 'public-read' if @bucket_access.empty?
+    @bucket_access = 'public-read' if @bucket_access && @bucket_access.empty?
     @bucket_access
   end
   
