@@ -1,13 +1,20 @@
 = BucketHead
 
-BucketHead grabs the contents of a URI and sticks them on S3. It requires either the RightAWS or AWS/S3 libraries--if both are present it uses RightAWS.
+BucketHead grabs the contents of a URI--an image, html or xml file, whatever--and sticks them on S3. It requires either the RightAWS or AWS/S3 libraries. If both are present it uses RightAWS.
 
 == Usage:
+
+Make a hash available in your environment called AWS_CREDENTIALS holding, yes, your AWS credential. In Rails you can create a config/initializers/amazon_credentials.rb file containing:
+
+  AWS_CREDENTIALS = { :access_key => 'your-key-goes-here',
+                      :secret_access_key => 'your-top-secret-key-goes-here'}
+
+Then you can do something like t:
 
   BucketHead.set_bucket_name('your-bucket')
   BucketHead.put( :uri => 'http://wordie.org/', :key => 'fake-wordie.html')
 
-Results in the contents of the specified URI being uploaded to:
+That would result in the source of http://wordie.org/ being uploaded to:
 http://your-bucket.s3.amazonaws.com/fake-wordie.html
 
 By default buckets and anything put in them have 'public-read' access. You can set bucket permissions, if, prior to bucket creation, you call:
@@ -18,7 +25,7 @@ You can set access on individual objects within buckets with an ':access' argume
 
   BucketHead.put( :uri => 'http://wordie.org/', :key => 'fake-wordie.html', :access => 'private')
 
-BucketHead will try to base the content type on the filename suffix, but you can set it explicitly if you want:
+BucketHead will try to base the content type on what it finds at the :uri, but you can set it explicitly if you want:
 
   BucketHead.put( :uri => 'http://wordie.org/', :key => 'fake-wordie.html', :access => 'private', :content_type => 'text/html')
 
