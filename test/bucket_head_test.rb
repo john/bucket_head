@@ -4,11 +4,11 @@ class BucketHeadTest < Test::Unit::TestCase
 
   context "set_bucket" do
     setup do
-      BucketHead.set_bucket_name( 'buckety_buck_buck' )
+      BucketHead.set_bucket_name( 'buck_buck_bucket' )
     end
     
     should "set the bucket name" do
-      assert_equal 'buckety_buck_buck', BucketHead.bucket_name
+      assert_equal 'buck_buck_bucket', BucketHead.bucket_name
     end
   end
   
@@ -31,9 +31,20 @@ class BucketHeadTest < Test::Unit::TestCase
   end
   
   context "bucket" do
-    
-    should "return either a right_aws or aws/s3 bucket object" do
-      assert_match /foo/, BucketHead.bucket.class.to_s
+    should_eventually "return either a right_aws or aws/s3 bucket object" do
+      # why does this need to be in the BucketHead namespace?
+      BucketHead::AWS_CREDENTIALS = { :access_key => 'your-key-goes-here',
+                          :secret_access_key => 'your-top-secret-key-goes-here'}
+      BucketHead.set_bucket_name( 'buck_buck_bucket' )
+      
+      # mocha?
+      assert_equal 'foo', BucketHead.bucket.class.to_s
+    end
+  end
+  
+  context "put" do
+    should_eventually "move something over to S3" do
+      # mock
     end
   end
   
