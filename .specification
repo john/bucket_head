@@ -1,10 +1,10 @@
 --- !ruby/object:Gem::Specification
-name: john-bucket_head 
+name: john-bucket_head
 version: !ruby/object:Gem::Version
   version: 0.1.0
 platform: ruby
 authors:
-- John McGrath 
+- John McGrath
 autorequire:
 bindir: bin
 cert_chain: []
